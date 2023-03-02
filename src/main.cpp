@@ -15,20 +15,24 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
+    // If proper arguements are not provided, throw error with usage info.
     if (argc != 4)
     {
         cerr << "Usage: " << argv[0] << " <Scale> <Delay> <ROM>\n";
         exit(EXIT_FAILURE);
     }
 
+    // Set the scale, delay and get the rom address.
     int videoScale = stoi(argv[1]);
     int cycleDelay = stoi(argv[2]);
     char *romFilename = argv[3];
 
+    // Create object platform.
     Platform platform("CHIP-8 Emulator", VIDEO_WIDTH * videoScale, VIDEO_HEIGHT * videoScale, VIDEO_WIDTH, VIDEO_HEIGHT);
 
+    // Create object chip8.
     Chip8 chip8;
-    chip8.loadrom(romFilename);
+    chip8.loadrom(romFilename);// Load the rom
 
     int videoPitch = sizeof(chip8.video[0]) * VIDEO_WIDTH;
 
