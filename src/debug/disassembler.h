@@ -14,3 +14,4 @@ struct DecodedInstruction {
     std::string operands;
 };
 
+DecodedInstruction decode(std::uint16_t address, std::uint16_t opcode);
