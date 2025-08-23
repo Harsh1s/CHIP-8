@@ -19,3 +19,5 @@ std::vector<DecodedInstruction> disassemble(std::uint16_t start_address, const s
 std::string format_instruction(const DecodedInstruction& instruction);
 bool is_jump_or_call(std::uint16_t opcode);
 bool touches_register(std::uint16_t opcode, std::uint8_t register_index);
+
+}  // namespace chip8::debug
