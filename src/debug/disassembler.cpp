@@ -21,3 +21,14 @@ DecodedInstruction decode(std::uint16_t address, std::uint16_t opcode) {
     const auto n = static_cast<std::uint8_t>(opcode & 0xF);
     const auto kk = static_cast<std::uint8_t>(opcode & 0xFF);
     const auto nnn = static_cast<std::uint16_t>(opcode & 0x0FFF);
+    switch (family) {
+    case 0x0000:
+        if (opcode == 0x00E0) return {address, opcode, "CLS", ""};
+        if (opcode == 0x00EE) return {address, opcode, "RET", ""};
+        break;
+    case 0x1000: return {address, opcode, "JP", hex(nnn, 3)};
+    case 0x2000: return {address, opcode, "CALL", hex(nnn, 3)};
+    case 0x3000: return {address, opcode, "SE", "V" + std::to_string(x) + ", " + hex(kk, 2)};
+    case 0x4000: return {address, opcode, "SNE", "V" + std::to_string(x) + ", " + hex(kk, 2)};
+    case 0x6000: return {address, opcode, "LD", "V" + std::to_string(x) + ", " + hex(kk, 2)};
+    case 0x7000: return {address, opcode, "ADD", "V" + std::to_string(x) + ", " + hex(kk, 2)};
