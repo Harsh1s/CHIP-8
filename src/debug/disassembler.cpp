@@ -32,3 +32,13 @@ DecodedInstruction decode(std::uint16_t address, std::uint16_t opcode) {
     case 0x4000: return {address, opcode, "SNE", "V" + std::to_string(x) + ", " + hex(kk, 2)};
     case 0x6000: return {address, opcode, "LD", "V" + std::to_string(x) + ", " + hex(kk, 2)};
     case 0x7000: return {address, opcode, "ADD", "V" + std::to_string(x) + ", " + hex(kk, 2)};
+    case 0x8000:
+        if (n == 0x0) return {address, opcode, "LD", "V" + std::to_string(x) + ", V" + std::to_string(y)};
+        if (n == 0x4) return {address, opcode, "ADD", "V" + std::to_string(x) + ", V" + std::to_string(y)};
+        if (n == 0x5) return {address, opcode, "SUB", "V" + std::to_string(x) + ", V" + std::to_string(y)};
+        break;
+    case 0xA000: return {address, opcode, "LD", "I, " + hex(nnn, 3)};
+    case 0xD000: return {address, opcode, "DRW", "V" + std::to_string(x) + ", V" + std::to_string(y) + ", " + std::to_string(n)};
+    }
+    return decoded;
+}
