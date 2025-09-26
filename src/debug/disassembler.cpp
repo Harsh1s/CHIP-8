@@ -42,3 +42,11 @@ DecodedInstruction decode(std::uint16_t address, std::uint16_t opcode) {
     }
     return decoded;
 }
+std::vector<DecodedInstruction> disassemble(std::uint16_t start_address, const std::vector<std::uint8_t>& bytes) {
+    std::vector<DecodedInstruction> decoded;
+    for (std::size_t offset = 0; offset + 1 < bytes.size(); offset += 2) {
+        const auto opcode = static_cast<std::uint16_t>((bytes[offset] << 8) | bytes[offset + 1]);
+        decoded.push_back(decode(static_cast<std::uint16_t>(start_address + offset), opcode));
+    }
+    return decoded;
+}
