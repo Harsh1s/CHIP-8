@@ -50,3 +50,10 @@ std::vector<DecodedInstruction> disassemble(std::uint16_t start_address, const s
     }
     return decoded;
 }
+std::string format_instruction(const DecodedInstruction& instruction) {
+    std::ostringstream out;
+    out << hex(instruction.address, 4) << "  " << hex(instruction.opcode, 4) << "  " << instruction.mnemonic;
+    if (!instruction.operands.empty()) out << " " << instruction.operands;
+    return out.str();
+}
+
