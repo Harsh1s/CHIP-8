@@ -57,3 +57,7 @@ std::string format_instruction(const DecodedInstruction& instruction) {
     return out.str();
 }
 
+bool is_jump_or_call(std::uint16_t opcode) {
+    return (opcode & 0xF000) == 0x1000 || (opcode & 0xF000) == 0x2000;
+}
+
