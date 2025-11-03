@@ -61,3 +61,10 @@ bool is_jump_or_call(std::uint16_t opcode) {
     return (opcode & 0xF000) == 0x1000 || (opcode & 0xF000) == 0x2000;
 }
 
+bool touches_register(std::uint16_t opcode, std::uint8_t register_index) {
+    const auto x = static_cast<std::uint8_t>((opcode >> 8) & 0xF);
+    const auto y = static_cast<std::uint8_t>((opcode >> 4) & 0xF);
+    return x == register_index || y == register_index;
+}
+
+}  // namespace chip8::debug
