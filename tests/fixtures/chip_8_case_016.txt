@@ -1,0 +1,1 @@
+case=16\nseed=6600\nrepo=CHIP-8\n
